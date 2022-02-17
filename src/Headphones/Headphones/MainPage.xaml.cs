@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Headphones.ViewModels;
 using Xamarin.Forms;
 
 namespace Headphones
@@ -13,6 +8,7 @@ namespace Headphones
         public MainPage()
         {
             InitializeComponent();
+            BindingContext = new MainPageViewModel(Navigation);
         }
     }
 }
