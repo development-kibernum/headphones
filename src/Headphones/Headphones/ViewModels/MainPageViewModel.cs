@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Headphones.Models;
 using Headphones.ViewModel;
-
+using Headphones.Views;
 
 namespace Headphones.ViewModels
 {
@@ -14,11 +14,13 @@ namespace Headphones.ViewModels
             Navigation = navigation;
             Phones = new ObservableCollection<Phone>();
             Speakers = new ObservableCollection<Speaker>();
+            NavigateToDetailPage = new Command<Phone>(async (model) => await ExecuteNavigateToDetailPage(model));
             GetProducts();
             GetSpeakers();
         }
 
         private readonly INavigation _navigation;
+        public Command NavigateToDetailPage { get; }
         public ObservableCollection<Phone> Phones { get; set; }
         public ObservableCollection<Speaker> Speakers { get; set; }
 
@@ -72,6 +74,11 @@ namespace Headphones.ViewModels
                 price = 165,
                 image = "bose_bluetooth.png"
             });
+        }
+
+        private Task ExecuteNavigateToDetailPage(Phone model)
+        {
+            return Navigation.PushAsync(new DetailPage(model));
         }
     }
 }
